@@ -28,6 +28,9 @@ public class User {
     @Column(name = "is_del")
     private Boolean isDeleted;
 
+    @Column(name="Address")
+    private String Address;
+
     public Integer getId() {
         return id;
     }
@@ -90,5 +93,13 @@ public class User {
 
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
     }
 }
