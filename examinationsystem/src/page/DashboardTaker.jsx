@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import {
   LayoutGrid,
   FileText,
@@ -15,7 +15,7 @@ import {
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import "./DashboardTaker.css";
+import "./DashboardTaker.css"
 
 // Custom Alert Component
 const CustomAlert = ({ title, description, onClose }) => (
@@ -44,22 +44,9 @@ export const ResponsiveDashboardT = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
-  const [loggedInUserName, setLoggedInUserName] = useState("Guest"); // Default name
-
-  useEffect(() => {
-    // Fetch the logged-in user's name from localStorage or an API
-    const fetchUserName = () => {
-      const userInfo = JSON.parse(localStorage.getItem("user")); // Replace "user" with your key
-      if (userInfo && userInfo.name) {
-        setLoggedInUserName(userInfo.name);
-      }
-    };
-
-    fetchUserName();
-  }, []);
 
   const menuItems = [
-    { name: "Dashboard", icon: LayoutGrid, path: "/", tooltip: "View your dashboard" },
+    { name: "Dashboard", icon: LayoutGrid, path: "/taker", tooltip: "View your dashboard" },
     { name: "Exams", icon: FileText, path: "/exams", tooltip: "View upcoming exams" },
     { name: "Grades", icon: ClipboardList, path: "/grades", tooltip: "Check your grades" },
     { name: "Settings", icon: Settings, path: "/settings", tooltip: "Manage your settings" },
@@ -67,54 +54,95 @@ export const ResponsiveDashboardT = () => {
   ];
 
   const handleLogout = () => {
-    localStorage.removeItem("user"); // Clear user data on logout
-    navigate("/login");
+    // Add your logout logic here
+    navigate('/');
   };
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   const [events] = useState([
     {
+
       title: "Quiz 1 Linear",
+
       start: "2024-03-06",
+
       color: "#FFB6C1",
+
       details: "Linear Algebra Quiz - Chapter 1-3",
+
       duration: "1 hour"
+
     },
+
     {
+
       title: "Theory Final Exam",
+
       start: "2024-03-14",
+
       color: "#FFEB8A",
+
       details: "Comprehensive Theory Exam",
+
       duration: "2 hours"
+
     },
+
     {
+
       title: "Network Quiz 2",
+
       start: "2024-03-13",
+
       color: "#B0E0E6",
+
       details: "Networking Fundamentals",
+
       duration: "45 minutes"
+
     },
+
     {
+
       title: "Machine Learning Final Exam",
+
       start: "2024-03-26",
+
       color: "#ADD8E6",
+
       details: "ML Algorithms and Applications",
+
       duration: "3 hours"
+
     },
+
     {
+
       title: "Logic Design Final Exam",
+
       start: "2024-03-25",
+
       color: "#B0E0E6",
+
       details: "Digital Logic Design Final",
+
       duration: "2 hours"
+
     },
+
     {
+
       title: "Linear Final Exam",
+
       start: "2024-03-17",
+
       color: "#FFEB8A",
+
       details: "Linear Algebra Final Exam",
+
       duration: "2.5 hours"
+
     },
   ]);
 
@@ -141,7 +169,12 @@ export const ResponsiveDashboardT = () => {
       )}
 
       {/* Sidebar */}
-      <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white min-h-screen border-r shadow-sm transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:transform-none transition-transform duration-200 ease-in-out`}>
+      <aside className={`
+        fixed lg:static inset-y-0 left-0 z-50
+        w-64 bg-white min-h-screen border-r shadow-sm
+        transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        lg:transform-none transition-transform duration-200 ease-in-out
+      `}>
         <div className="p-4 h-full flex flex-col">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer">
@@ -166,8 +199,8 @@ export const ResponsiveDashboardT = () => {
                   toggleSidebar();
                 }}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${isActivePath(item.path)
-                  ? "text-green-500 bg-green-50 border-l-4 border-green-500"
-                  : "text-gray-600 hover:bg-gray-50"
+                  ? 'text-green-500 bg-green-50 border-l-4 border-green-500'
+                  : 'text-gray-600 hover:bg-gray-50'
                   }`}
               >
                 <item.icon className="w-5 h-5" />
@@ -189,7 +222,7 @@ export const ResponsiveDashboardT = () => {
             >
               <Menu className="w-6 h-6" />
             </button>
-            <h1 className="text-2xl font-semibold">Welcome Back {loggedInUserName} 👋</h1>
+            <h1 className="text-2xl font-semibold">Welcome Back Guest 👋</h1>
           </div>
 
           <div className="flex items-center gap-4">
@@ -218,7 +251,7 @@ export const ResponsiveDashboardT = () => {
                 className="relative"
               >
                 <img
-                  src="..\src\assets\Profile.png"
+                  src="../src/assets/Profile.png"
                   alt="Profile"
                   className="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
                 />
@@ -239,6 +272,7 @@ export const ResponsiveDashboardT = () => {
           </div>
         </header>
 
+        {/* Rest of your component remains the same */}
         {/* Welcome Message */}
         {showWelcomeMessage && (
           <div className="mx-6 mt-6">
@@ -258,12 +292,12 @@ export const ResponsiveDashboardT = () => {
               initialView="dayGridMonth"
               events={events}
               headerToolbar={{
-                left: "prev,next",
-                center: "title",
-                right: "",
+                left: 'prev,next',
+                center: 'title',
+                right: '',
               }}
-              titleFormat={{ month: "long", year: "numeric" }}
-              dayHeaderFormat={{ weekday: "short" }}
+              titleFormat={{ month: 'long', year: 'numeric' }}
+              dayHeaderFormat={{ weekday: 'short' }}
               height="auto"
               eventDisplay="block"
               eventBackgroundColor="transparent"

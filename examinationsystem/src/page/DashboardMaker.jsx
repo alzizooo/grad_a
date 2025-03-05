@@ -20,7 +20,8 @@ import "./DashboardMaker.css"
 import ExamsMaker from './ExamsMaker.jsx';
 import ExamMaking from './ExamMaking.jsx';
 import GenerateAI from './GenerateAI.jsx'
-
+import QuestionEditPage from './QuestionEditPage.jsx';
+import QuizResultsPage from "./QuizResultsPage.jsx";
 // Custom Alert Component
 const CustomAlert = ({ title, description, onClose }) => (
   <div className="bg-green-50 border border-green-200 rounded-lg p-4 relative">
@@ -119,7 +120,7 @@ const ResponsiveDashboardM = () => {
 
   const handleLogout = () => {
     // Add your logout logic here
-    navigate('/login');
+    navigate('/');
   };
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -222,8 +223,8 @@ const ResponsiveDashboardM = () => {
                   toggleSidebar();
                 }}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${isActivePath(item.path)
-                    ? 'text-green-500 bg-green-50 border-l-4 border-green-500'
-                    : 'text-gray-600 hover:bg-gray-50'
+                  ? 'text-green-500 bg-green-50 border-l-4 border-green-500'
+                  : 'text-gray-600 hover:bg-gray-50'
                   }`}
               >
                 <item.icon className="w-5 h-5" />
@@ -246,7 +247,7 @@ const ResponsiveDashboardM = () => {
               <Menu className="w-6 h-6" />
             </button>
             <div className="flex items-center gap-4">
-              <h1 className="text-2xl font-semibold">Welcome Back Nada 👋</h1>
+              <h1 className="text-2xl font-semibold">Welcome Back Guest 👋</h1>
 
             </div>
           </div>
@@ -277,7 +278,7 @@ const ResponsiveDashboardM = () => {
                 className="relative"
               >
                 <img
-                  src="..\src\assets\Profile.png"
+                  src="../src/assets/Profile.png"
                   alt="Profile"
                   className="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
                 />
@@ -344,6 +345,8 @@ const ResponsiveDashboardM = () => {
           <Route path="/exams" element={<ExamsMaker />} />
           <Route path="/create-exam" element={<ExamMaking />} />
           <Route path="/create-exam/ai" element={<GenerateAI />} />
+          <Route path="/QuestionEditPage" element={<QuestionEditPage />} />
+          <Route path="/QuizResultsPage" element={<QuizResultsPage />} />
           {/* Add other routes as needed */}
         </Routes>
 

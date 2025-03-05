@@ -4,14 +4,12 @@ const CustomSwitch = ({ checked, onChange }) => {
   return (
     <button
       onClick={() => onChange(!checked)}
-      className={`relative w-11 h-6 rounded-full transition-colors ${
-        checked ? "bg-green-500" : "bg-gray-300"
-      }`}
+      className={`relative w-11 h-6 rounded-full transition-colors ${checked ? "bg-green-500" : "bg-gray-300"
+        }`}
     >
       <span
-        className={`block w-4 h-4 bg-white rounded-full shadow transform transition-transform ${
-          checked ? "translate-x-6" : "translate-x-1"
-        }`}
+        className={`block w-4 h-4 bg-white rounded-full shadow transform transition-transform ${checked ? "translate-x-6" : "translate-x-1"
+          }`}
       />
     </button>
   );
@@ -108,7 +106,7 @@ const EditUser = () => {
                 <div className="flex items-center gap-6">
                   <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
                     <img
-                      src="src/assets/images/Profile.png"
+                      src="../src/assets/Profile.png"
                       alt="User Avatar"
                       className="w-full h-full object-cover"
                     />

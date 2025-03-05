@@ -27,7 +27,7 @@ const CreateUser = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8081/api/users', {
+      const response = await fetch('http://localhost:8081/api/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

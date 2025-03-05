@@ -89,7 +89,7 @@ const DeleteUser = () => {
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 bg-gray-100 rounded-full overflow-hidden">
                   <img
-                    src="src/assets/images/Profile.png"
+                    src="../src/assets/Profile.png"
                     alt="User avatar"
                     className="w-full h-full object-cover"
                   />

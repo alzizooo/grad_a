@@ -14,14 +14,14 @@ function HomePage() {
 
   const handleSignIn = async () => {
     try {
-      // Fetch user data from the backend
-      const response = await axios.get("http://localhost:8081/api/users");
-      const users = response.data;
+      // Send login request to the backend
+      const response = await axios.post("http://localhost:8081/api/users/login", {
+        email,
+        password
+      });
 
-      // Find the user matching the email and password
-      const user = users.find(
-        (u) => u.email === email && u.password === password
-      );
+      // If login is successful, retrieve user details
+      const user = response.data;
 
       if (user) {
         // Navigate based on the user's role
@@ -32,17 +32,12 @@ function HomePage() {
         } else if (user.role === "examtaker") {
           navigate("/taker");
         } else {
-          // Navigate to a default route or handle unexpected roles
-          navigate("/taker");
+          navigate("/taker"); // Default route for unknown roles
         }
-      } else {
-        // Show an error if the credentials are incorrect
-        alert("Wrong username or password");
       }
-
     } catch (error) {
-      console.error("Error fetching users:", error);
-      alert("Failed to sign in. Please try again later.");
+      console.error("Login failed:", error.response ? error.response.data : error.message);
+      alert("Wrong username or password");
     }
   };
 
@@ -79,10 +74,7 @@ function HomePage() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <div className="line" />
-          <button
-            className="primary-button"
-            onClick={handleSignIn}
-          >
+          <button className="primary-button" onClick={handleSignIn}>
             <span className="sign-in">Sign In</span>
             <div className="rectangle-1" />
           </button>
@@ -92,18 +84,15 @@ function HomePage() {
   );
 }
 
-
-
 // App Component with Routing
 export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} /> {/* Home route */}
+        <Route path="/" element={<HomePage />} />
         <Route path="/admin/*" element={<ResponsiveDashboard />} />
         <Route path="/taker/*" element={<ResponsiveDashboardT />} />
         <Route path="/maker/*" element={<ResponsiveDashboardM />} />
-
       </Routes>
     </Router>
   );
